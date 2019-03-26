@@ -1,3 +1,8 @@
+out.json
+input/
+
+package-lock.json
+
 # Logs
 logs
 *.log

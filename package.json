@@ -1,0 +1,16 @@
+{
+  "name": "software-metrics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "recursive-readdir": "^2.2.2",
+    "typhonjs-escomplex": "^0.1.0"
+  }
+}
