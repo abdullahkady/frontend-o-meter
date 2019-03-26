@@ -12,5 +12,10 @@
   "dependencies": {
     "recursive-readdir": "^2.2.2",
     "typhonjs-escomplex": "^0.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
   }
 }
