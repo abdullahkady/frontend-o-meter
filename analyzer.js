@@ -1,4 +1,5 @@
 const jsAnalyzer = require('typhonjs-escomplex');
+const CssAnalyzer = require('analyze-css');
 
 const analyzeJS = (sourceCode) => {
   const metrics = jsAnalyzer.analyzeModule(sourceCode);
@@ -24,6 +25,14 @@ const analyzeJS = (sourceCode) => {
   return metrics;
 };
 
+const analyzeCSS = sourceCode => new Promise((res, rej) => {
+  new CssAnalyzer(sourceCode, (err, result) => {
+    if (err) return rej(err);
+    return res(result.offenders);
+  });
+});
+
 module.exports = {
   analyzeJS,
+  analyzeCSS,
 };
