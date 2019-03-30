@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { promisify } = require('util');
-const { analyzeJS } = require('./analyzer');
+const { analyzeJS, analyzeCSS } = require('./analyzer');
 
 const readFile = fileName => promisify(fs.readFile)(fileName, 'utf8');
 
@@ -40,12 +40,29 @@ const main = async () => {
     }),
   );
 
+  const cssMetrics = await Promise.all(
+    css.map(async (relativeFileName) => {
+      const fileName = path.join(inputDir, relativeFileName);
+      const sourceCode = await readFile(fileName);
+      return {
+        file: relativeFileName,
+        metrics: await analyzeCSS(sourceCode),
+      };
+    }),
+  );
+
   const result = {
-    css,
-    scss,
-    html,
-    ts,
-    jsMetrics,
+    files: {
+      scss,
+      html,
+      ts,
+      css,
+      js,
+    },
+    metrics: {
+      cssMetrics,
+      jsMetrics,
+    },
   };
 
   fs.writeFileSync('./out.json', JSON.stringify(result));
