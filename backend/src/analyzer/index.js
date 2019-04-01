@@ -28,7 +28,7 @@ const main = async () => {
     css, scss, html, js, ts,
   } = fileCategorizer(inputDir, files, extensions);
 
-  const jsMetrics = await Promise.all(
+  const jsAnalysis = await Promise.all(
     js.map(async (relativeFileName) => {
       const fileName = path.join(inputDir, relativeFileName);
       const sourceCode = await readFile(fileName);
@@ -40,7 +40,7 @@ const main = async () => {
     }),
   );
 
-  const cssMetrics = await Promise.all(
+  const cssAnalysis = await Promise.all(
     css.map(async (relativeFileName) => {
       const fileName = path.join(inputDir, relativeFileName);
       const sourceCode = await readFile(fileName);
@@ -59,9 +59,9 @@ const main = async () => {
       css,
       js,
     },
-    metrics: {
-      cssMetrics,
-      jsMetrics,
+    analysis: {
+      css: cssAnalysis,
+      js: jsAnalysis,
     },
   };
 
