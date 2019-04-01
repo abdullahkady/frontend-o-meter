@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const analyzer = require('../analyzer');
 
 app.use(morgan('dev'));
 app.use(cors());
@@ -11,7 +12,8 @@ app.use(helmet());
 
 app.post('/', async (req, res) => {
   const { dirPath } = req.body;
-  res.status(200).json({});
+  const response = await analyzer.analyzeDirectory(dirPath);
+  res.status(200).json(response);
 });
 
 // General error handler
