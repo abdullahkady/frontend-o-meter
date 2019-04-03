@@ -12,8 +12,12 @@ app.use(helmet());
 
 app.post('/', async (req, res) => {
   const { dirPath } = req.body;
-  const response = await analyzer.analyzeDirectory(dirPath);
-  res.status(200).json(response);
+  try {
+    const response = await analyzer.analyzeDirectory(dirPath);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json({ message: 'Bad path' });
+  }
 });
 
 // General error handler
@@ -30,6 +34,6 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Endpoint not found !' });
 });
 
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
+app.listen(4000, () => {
+  console.log('Server started on port 4000');
 });
