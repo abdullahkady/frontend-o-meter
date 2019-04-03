@@ -5,6 +5,7 @@
     "func-names": "off",
     "max-len": "warn",
     "no-param-reassign": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "no-new": "off"
   }
 }
