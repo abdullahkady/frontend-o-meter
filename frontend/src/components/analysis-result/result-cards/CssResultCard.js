@@ -1,26 +1,32 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-const JsResult = props => {
+const CssResult = props => {
   const { file, metrics } = props.data;
+  let totalOffenders = 0;
+  const offenders = [];
+  for (const key in metrics) {
+    if (metrics.hasOwnProperty(key)) {
+      totalOffenders += metrics[key].length;
+      offenders.push({ type: key, occurrences: metrics[key].length });
+    }
+  }
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
         <Card.Header>{file.split("/").pop()}</Card.Header>
         <br />
         <Card.Subtitle className="mb-2 text-muted">
-          Lines: {metrics.aggregate.sloc.logical}
+          Total Offenders: {totalOffenders}
         </Card.Subtitle>
-        <Card.Text>
-          {`The file contains a total of ${
-            metrics.methods.length
-          } methods, with an average of ${
-            metrics.methodAverage.paramCount
-          } argument per method`}
+        <Card.Text as="div">
           <ul>
-            <li>Cyclomatic Complexity: {metrics.aggregate.cyclomatic}</li>
-            <li>Cyclomatic Density: {metrics.aggregate.cyclomaticDensity}</li>
-            <li>Halstead difficulty{metrics.aggregate.halstead.difficulty}</li>
+            {offenders.map((off, i) => (
+              <li key={i}>
+                <strong>{off.type}: </strong>
+                {off.occurrences}
+              </li>
+            ))}
           </ul>
         </Card.Text>
         <hr />
@@ -32,4 +38,4 @@ const JsResult = props => {
   );
 };
 
-export default JsResult;
+export default CssResult;

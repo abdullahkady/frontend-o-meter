@@ -7,7 +7,7 @@ import {
   Alert,
   InputGroup
 } from "react-bootstrap";
-import Result from "./Result";
+import AnalysisResult from "./components/analysis-result/AnalysisResult";
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class App extends Component {
   render() {
     const { css, js, error } = this.state;
     if (css && js && (css.length || js.length)) {
-      return <Result css={css} js={js} />;
+      return <AnalysisResult css={css} js={js} />;
     }
     return (
       <Container style={{ marginTop: "10px" }}>
