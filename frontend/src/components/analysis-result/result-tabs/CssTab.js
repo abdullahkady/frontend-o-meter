@@ -1,6 +1,6 @@
 import React from "react";
 import CssResultCard from "../result-cards/CssResultCard";
-import chunkArray from "../../../utils/chunckArray";
+import chunkArray from "../../../utils/chunkArray";
 import { Row, Col } from "react-bootstrap";
 
 export default props => {
