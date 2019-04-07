@@ -8,11 +8,11 @@ export default props => {
   const rows = chunkArray(files, 3);
 
   return rows.map((chunk, i) => (
-    <React.Fragment>
-      <Row key={i}>
+    <React.Fragment key={i}>
+      <Row>
         {chunk.map((file, ix) => (
           <Col md={4} key={ix}>
-            <CssResultCard ix={ix} data={file} />
+            <CssResultCard data={file} />
           </Col>
         ))}
       </Row>
