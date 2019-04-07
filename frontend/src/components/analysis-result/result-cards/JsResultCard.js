@@ -1,5 +1,7 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { FILE_CHOICES } from "../../../constants/js-metrics";
+import { Card, Button } from "react-bootstrap";
+import getNestedProperty from "lodash/get";
 
 const JsResult = props => {
   const { file, metrics } = props.data;
@@ -17,10 +19,16 @@ const JsResult = props => {
           } methods, with an average of ${
             metrics.methodAverage.paramCount
           } argument per method`}
-          <ul>
-            <li>Cyclomatic Complexity: {metrics.aggregate.cyclomatic}</li>
-            <li>Cyclomatic Density: {metrics.aggregate.cyclomaticDensity}</li>
-            <li>Halstead difficulty{metrics.aggregate.halstead.difficulty}</li>
+          <hr />
+          <strong>Metrics: </strong>
+
+          <ul style={{ overflowY: "scroll", maxHeight: 200 }}>
+            {Object.keys(FILE_CHOICES).map((optionKey, i) => (
+              <li key={i}>
+                {`${optionKey}: `}
+                {getNestedProperty(metrics, FILE_CHOICES[optionKey])}
+              </li>
+            ))}
           </ul>
         </Card.Text>
         <hr />
