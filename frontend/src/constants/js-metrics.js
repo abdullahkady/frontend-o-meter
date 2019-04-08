@@ -2,7 +2,7 @@
   Maps the display name (key) to the property path in the response object
 */
 
-export const FILE_CHOICES = {
+export const FILE_SORT_CHOICES = {
   "Cyclomatic Complexity": "aggregate.cyclomatic",
   "Cyclomatic Density": "aggregate.cyclomaticDensity",
   "Halstead Bugs": "aggregate.halstead.bugs",

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FILE_CHOICES } from "../../../constants/js-metrics";
+import { FILE_SORT_CHOICES } from "../../../constants/js-metrics";
 import { Card, Collapse } from "react-bootstrap";
 import getNestedProperty from "lodash/get";
 
@@ -38,10 +38,10 @@ class JsResult extends Component {
                     maxHeight: 200
                   }}
                 >
-                  {Object.keys(FILE_CHOICES).map((optionKey, i) => (
+                  {Object.keys(FILE_SORT_CHOICES).map((optionKey, i) => (
                     <li key={i}>
                       {`${optionKey}: `}
-                      {getNestedProperty(metrics, FILE_CHOICES[optionKey])}
+                      {getNestedProperty(metrics, FILE_SORT_CHOICES[optionKey])}
                     </li>
                   ))}
                 </ul>
