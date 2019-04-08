@@ -1,6 +1,13 @@
-import { Button, Dropdown, Form, InputGroup, Navbar } from 'react-bootstrap';
+import {
+  Button,
+  Dropdown,
+  Form,
+  InputGroup,
+  Navbar
+} from 'react-bootstrap';
 
 import { FILE_SORT_CHOICES } from '../../../constants/js-metrics';
+import FilterForm from './FilterForm'
 import React from 'react';
 
 export default ({ onSortChanged, sortOption, toggleOrder, isAscending }) => {
@@ -34,6 +41,7 @@ export default ({ onSortChanged, sortOption, toggleOrder, isAscending }) => {
           </InputGroup.Append>
         </InputGroup>
       </Form>
+      <FilterForm />
     </Navbar>
   );
 };
