@@ -15,7 +15,7 @@ class JsResult extends Component {
     const { isOpen } = this.state;
     const { file, metrics } = this.props.data;
     return (
-      <Card style={{ width: '18rem' }}>
+      <Card >
         <Card.Body>
           <Card.Header>{file.split('/').pop()}</Card.Header>
           <br />
