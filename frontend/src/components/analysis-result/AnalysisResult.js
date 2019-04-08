@@ -8,7 +8,7 @@ export default props => {
 
   return (
     <Container>
-      <Tabs defaultActiveKey="js" id="uncontrolled-tab-example">
+      <Tabs justify="center" defaultActiveKey="js">
         <Tab eventKey="js" title="JavaScript">
           <Container style={{ marginTop: "15px" }}>
             <JsTab data={js} />
