@@ -1,7 +1,8 @@
-import React from "react";
-import { Tabs, Tab, Container } from "react-bootstrap";
-import JsTab from "./result-tabs/JsTab";
-import CssTab from "./result-tabs/CssTab";
+import { Container, Tab, Tabs } from 'react-bootstrap';
+
+import CssTab from './CssResultTab';
+import JsTab from './JsResultTab';
+import React from 'react';
 
 export default props => {
   let { css, js } = props;
@@ -10,12 +11,12 @@ export default props => {
     <Container>
       <Tabs justify="center" defaultActiveKey="js">
         <Tab eventKey="js" title="JavaScript">
-          <Container style={{ marginTop: "15px" }}>
+          <Container style={{ marginTop: '15px' }}>
             <JsTab data={js} />
           </Container>
         </Tab>
         <Tab eventKey="css" title="CSS">
-          <Container style={{ marginTop: "15px" }}>
+          <Container style={{ marginTop: '15px' }}>
             <CssTab data={css} />
           </Container>
         </Tab>

@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-
 import {
-  Button,
-  FormControl,
-  Container,
   Alert,
+  Button,
+  Container,
+  FormControl,
   InputGroup
-} from "react-bootstrap";
-import AnalysisResult from "./components/analysis-result/AnalysisResult";
+} from 'react-bootstrap';
+import React, { Component } from 'react';
+
+import ResultComponent from './components/ResultComponent';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: "",
+      input: '',
       css: [],
       js: []
     };
@@ -21,29 +21,29 @@ class App extends Component {
   onSubmit = async () => {
     const { input } = this.state;
     if (!input) {
-      this.setState({ error: "Please provide a path" });
+      this.setState({ error: 'Please provide a path' });
       return;
     }
 
-    const raw = await fetch("http://localhost:4000/", {
-      method: "POST",
+    const raw = await fetch('http://localhost:4000/', {
+      method: 'POST',
       body: JSON.stringify({ dirPath: input }),
-      headers: { "Content-Type": "application/json" }
+      headers: { 'Content-Type': 'application/json' }
     });
     if (raw.status === 200) {
       const { css, js } = await raw.json();
       this.setState({ css, js });
     } else {
-      this.setState({ css: [], js: [], error: "Invalid path provided" });
+      this.setState({ css: [], js: [], error: 'Invalid path provided' });
     }
   };
   render() {
     const { css, js, error } = this.state;
     if (css && js && (css.length || js.length)) {
-      return <AnalysisResult css={css} js={js} />;
+      return <ResultComponent css={css} js={js} />;
     }
     return (
-      <Container style={{ marginTop: "10px" }}>
+      <Container style={{ marginTop: '10px' }}>
         {error && <Alert variant="warning">{error}</Alert>}
         <InputGroup>
           <InputGroup.Prepend>

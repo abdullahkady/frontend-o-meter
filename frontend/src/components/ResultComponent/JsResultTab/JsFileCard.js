@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { FILE_SORT_CHOICES } from "../../../constants/js-metrics";
-import { Card, Collapse } from "react-bootstrap";
-import getNestedProperty from "lodash/get";
+import { Card, Collapse } from 'react-bootstrap';
+import React, { Component } from 'react';
+
+import { FILE_SORT_CHOICES } from '../../../constants/js-metrics';
+import getNestedProperty from 'lodash/get';
 
 class JsResult extends Component {
   constructor(props) {
@@ -14,9 +15,9 @@ class JsResult extends Component {
     const { isOpen } = this.state;
     const { file, metrics } = this.props.data;
     return (
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: '18rem' }}>
         <Card.Body>
-          <Card.Header>{file.split("/").pop()}</Card.Header>
+          <Card.Header>{file.split('/').pop()}</Card.Header>
           <br />
           <Card.Subtitle className="mb-2 text-muted">
             Lines: {metrics.aggregate.sloc.logical}
@@ -34,7 +35,7 @@ class JsResult extends Component {
                 <ul
                   style={{
                     marginTop: 10,
-                    overflowY: "scroll",
+                    overflowY: 'scroll',
                     maxHeight: 200
                   }}
                 >
@@ -52,11 +53,11 @@ class JsResult extends Component {
             className="btn btn-primary"
             onClick={() => this.setState({ isOpen: !isOpen })}
           >
-            {this.state.isOpen ? "Hide " : "Show"} Metrics
+            {this.state.isOpen ? 'Hide ' : 'Show'} Metrics
           </button>
           <hr />
           <Card.Footer className="justify-content-md-center">
-            <pre style={{ whiteSpace: "pre-wrap" }}>{file}</pre>
+            <pre style={{ whiteSpace: 'pre-wrap' }}>{file}</pre>
           </Card.Footer>
         </Card.Body>
       </Card>

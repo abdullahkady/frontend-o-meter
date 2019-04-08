@@ -1,5 +1,5 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import { Card } from 'react-bootstrap';
+import React from 'react';
 
 const CssResult = props => {
   const { file, metrics } = props.data;
@@ -12,9 +12,9 @@ const CssResult = props => {
     }
   }
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Header>{file.split("/").pop()}</Card.Header>
+        <Card.Header>{file.split('/').pop()}</Card.Header>
         <br />
         <Card.Subtitle className="mb-2 text-muted">
           Total Offenders: {totalOffenders}
@@ -31,7 +31,7 @@ const CssResult = props => {
         </Card.Text>
         <hr />
         <Card.Footer className="justify-content-md-center">
-          <pre style={{ whiteSpace: "pre-wrap" }}>{file}</pre>
+          <pre style={{ whiteSpace: 'pre-wrap' }}>{file}</pre>
         </Card.Footer>
       </Card.Body>
     </Card>

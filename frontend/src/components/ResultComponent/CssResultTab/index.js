@@ -1,7 +1,8 @@
-import React from "react";
-import CssResultCard from "../result-cards/CssResultCard";
-import chunkArray from "../../../utils/chunkArray";
-import { Row, Col } from "react-bootstrap";
+import { Col, Row } from 'react-bootstrap';
+
+import CssFileCard from './CssFileCard';
+import React from 'react';
+import chunkArray from '../../../utils/chunkArray';
 
 export default props => {
   const { data: files } = props;
@@ -12,7 +13,7 @@ export default props => {
       <Row>
         {chunk.map((file, ix) => (
           <Col md={4} key={ix}>
-            <CssResultCard data={file} />
+            <CssFileCard data={file} />
           </Col>
         ))}
       </Row>
