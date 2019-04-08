@@ -3,14 +3,14 @@
 */
 
 export const FILE_CHOICES = {
-  "Total Cyclomatic Complexity": "aggregate.cyclomatic",
-  "Total Cyclomatic Density": "aggregate.cyclomaticDensity",
-  "Total Halstead Bugs": "aggregate.halstead.bugs",
-  "Total Halstead Difficulty": "aggregate.halstead.difficulty",
-  "Total Halstead Effort": "aggregate.halstead.effort",
-  "Total Halstead Length": "aggregate.halstead.length",
-  "Total Halstead Time": "aggregate.halstead.time",
+  "Cyclomatic Complexity": "aggregate.cyclomatic",
+  "Cyclomatic Density": "aggregate.cyclomaticDensity",
+  "Halstead Bugs": "aggregate.halstead.bugs",
+  "Halstead Difficulty": "aggregate.halstead.difficulty",
+  "Halstead Effort": "aggregate.halstead.effort",
+  "Halstead Length": "aggregate.halstead.length",
+  "Halstead Time": "aggregate.halstead.time",
   "Average Function Argument Count": "methodAverage.paramCount",
-  "Total Lines of Code(logical)": "aggregate.sloc.logical",
+  "Lines of Code(logical)": "aggregate.sloc.logical",
   "Maintainability Index": "maintainability"
 };
