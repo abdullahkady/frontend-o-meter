@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import React, { Component } from 'react';
 
-import { FILE_SORT_CHOICES } from '../../../constants/js-metrics';
+import { FILE_SORT_CHOICES } from '../../../../constants/js-metrics';
 
 class FilterForm extends Component {
   constructor(props) {

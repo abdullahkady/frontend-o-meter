@@ -70,7 +70,13 @@ class JsTab extends Component {
           sortOption={sortOption}
           onSortChanged={this.onSortChanged}
         />
-        <Container style={{ marginTop: '15px' }}>{filesCards}</Container>
+        <Container className="text-center" style={{ marginTop: '15px' }}>
+          {filesCards.length ? (
+            filesCards
+          ) : (
+            <h1>Sorry, no files matched your filter</h1>
+          )}
+        </Container>
       </React.Fragment>
     );
   }
