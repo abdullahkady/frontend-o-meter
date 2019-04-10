@@ -3,7 +3,8 @@ import {
   Dropdown,
   Form,
   FormControl,
-  InputGroup
+  InputGroup,
+  Spinner
 } from 'react-bootstrap';
 import React, { Component } from 'react';
 
@@ -15,7 +16,8 @@ class FilterForm extends Component {
     this.state = {
       filterField: '',
       isGreaterThan: true,
-      filterValue: 1
+      filterValue: 1,
+      isFiltering: false
     };
   }
 
@@ -30,11 +32,16 @@ class FilterForm extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { isGreaterThan, filterField, filterValue } = this.state;
-    this.props.onFilter({ filterValue, isGreaterThan, filterField });
+    this.setState({ isFiltering: true });
+    this.props
+      .onFilter({ filterValue, isGreaterThan, filterField })
+      .then(done => {
+        this.setState({ isFiltering: false });
+      });
   };
 
   render() {
-    const { filterField, isGreaterThan } = this.state;
+    const { filterField, isGreaterThan, isFiltering } = this.state;
 
     const dropDownOptions = Object.keys(FILE_SORT_CHOICES).map(
       (optionKey, i) => (
@@ -42,6 +49,21 @@ class FilterForm extends Component {
           {optionKey}
         </Dropdown.Item>
       )
+    );
+
+    const submitButton = isFiltering ? (
+      <Button disabled>
+        <Spinner
+          as="span"
+          animation="grow"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
+        Filtering...
+      </Button>
+    ) : (
+      <Button type="submit">Filter</Button>
     );
 
     return (
@@ -68,14 +90,13 @@ class FilterForm extends Component {
           style={{ maxWidth: 200 }}
           required
           min="1"
-          max="1000"
           type="number"
           placeholder="Threshold"
           onChange={({ target }) =>
             this.setState({ filterValue: target.value })
           }
         />
-        <Button type="submit">Filter</Button>
+        {submitButton}
       </Form>
     );
   }

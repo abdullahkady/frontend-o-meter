@@ -1,10 +1,12 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import React, { Component } from 'react';
 
 import { FILE_SORT_CHOICES } from '../../../constants/js-metrics';
+import { FILTER_DELAY_RANGE_SECS } from '../../../config/';
 import JsFileCard from './JsFileCard';
 import SelectionBar from './SelectionBar';
 import chunkArray from '../../../utils/chunkArray';
+import delay from '../../../utils/delay';
 import filterFiles from '../../../utils/filterFiles';
 import sortFiles from '../../../utils/sortFiles';
 
@@ -14,7 +16,8 @@ class JsTab extends Component {
     this.state = {
       sortOption: '',
       isAscending: false,
-      filterOptions: null
+      filterOptions: null,
+      isFiltering: false
     };
   }
 
@@ -27,12 +30,17 @@ class JsTab extends Component {
   };
 
   onFilterSubmission = filterOptions => {
-    this.setState({ filterOptions });
+    this.setState({ isFiltering: true });
+    return new Promise(async resolve => {
+      await delay(FILTER_DELAY_RANGE_SECS);
+      this.setState({ filterOptions, isFiltering: false });
+      resolve();
+    });
   };
 
   render() {
     let { data: rawFiles } = this.props;
-    const { sortOption, isAscending, filterOptions } = this.state;
+    const { sortOption, isAscending, filterOptions, isFiltering } = this.state;
     const sortOptionObjectPath = FILE_SORT_CHOICES[sortOption];
     if (filterOptions) {
       const { filterValue, isGreaterThan, filterField } = filterOptions;
@@ -61,6 +69,29 @@ class JsTab extends Component {
       </React.Fragment>
     ));
 
+    let pageContent;
+    if (isFiltering) {
+      pageContent = (
+        <div>
+          {Array(3).fill(
+            <Spinner
+              as="span"
+              animation="grow"
+              size="lg"
+              role="status"
+              aria-hidden="true"
+            />
+          )}
+        </div>
+      );
+    } else {
+      pageContent = filesCards.length ? (
+        filesCards
+      ) : (
+        <h1>Sorry, no files matched your filter</h1>
+      );
+    }
+
     return (
       <React.Fragment>
         <SelectionBar
@@ -70,12 +101,9 @@ class JsTab extends Component {
           sortOption={sortOption}
           onSortChanged={this.onSortChanged}
         />
+        <hr />
         <Container className="text-center" style={{ marginTop: '15px' }}>
-          {filesCards.length ? (
-            filesCards
-          ) : (
-            <h1>Sorry, no files matched your filter</h1>
-          )}
+          {pageContent}
         </Container>
       </React.Fragment>
     );
