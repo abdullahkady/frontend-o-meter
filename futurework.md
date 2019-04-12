@@ -1,0 +1,4 @@
+- Provide the system as a SaaS
+- Allow multiple tabs to be open simultaneously
+- Compare methods across files next to each other
+- Add COSMIC FSM to the modules
