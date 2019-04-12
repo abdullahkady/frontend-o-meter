@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import { FILE_SORT_CHOICES } from '../../../constants/js-metrics';
 import getNestedProperty from 'lodash/get';
+import FileDetailsModal from './FileDetailsModal';
 
 class JsResult extends Component {
   constructor(props) {
@@ -11,13 +12,20 @@ class JsResult extends Component {
       isOpen: false
     };
   }
+
   render() {
     const { isOpen } = this.state;
     const { file, metrics } = this.props.data;
+
     return (
-      <Card >
+      <Card>
         <Card.Body>
-          <Card.Header>{file.split('/').pop()}</Card.Header>
+          <Card.Header
+            style={{ cursor: 'pointer' }}
+            onClick={() => this.setState({ modalShow: true })}
+          >
+            {file.split('/').pop()}
+          </Card.Header>
           <br />
           <Card.Subtitle className="mb-2 text-muted">
             Lines: {metrics.aggregate.sloc.logical}
@@ -56,6 +64,12 @@ class JsResult extends Component {
             {this.state.isOpen ? 'Hide ' : 'Show'} Metrics
           </button>
           <hr />
+
+          <FileDetailsModal
+            data={metrics}
+            show={this.state.modalShow}
+            onHide={() => this.setState({ modalShow: false })}
+          />
           <Card.Footer className="justify-content-md-center">
             <pre style={{ whiteSpace: 'pre-wrap' }}>{file}</pre>
           </Card.Footer>
