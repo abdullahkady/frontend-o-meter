@@ -15,16 +15,16 @@ class JsResult extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { file, metrics } = this.props.data;
+    const { file: fileName, metrics } = this.props.data;
 
     return (
       <Card>
         <Card.Body>
           <Card.Header
             style={{ cursor: 'pointer' }}
-            onClick={() => this.setState({ modalShow: true })}
+            onClick={() => this.setState({ shouldShow: true })}
           >
-            {file.split('/').pop()}
+            {fileName.split('/').pop()}
           </Card.Header>
           <br />
           <Card.Subtitle className="mb-2 text-muted">
@@ -66,12 +66,13 @@ class JsResult extends Component {
           <hr />
 
           <FileDetailsModal
-            data={metrics}
-            show={this.state.modalShow}
-            onHide={() => this.setState({ modalShow: false })}
+            fileName={fileName}
+            metrics={metrics}
+            show={this.state.shouldShow}
+            onHide={() => this.setState({ shouldShow: false })}
           />
           <Card.Footer className="justify-content-md-center">
-            <pre style={{ whiteSpace: 'pre-wrap' }}>{file}</pre>
+            <pre style={{ whiteSpace: 'pre-wrap' }}>{fileName}</pre>
           </Card.Footer>
         </Card.Body>
       </Card>
