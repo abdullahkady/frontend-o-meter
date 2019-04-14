@@ -2,8 +2,8 @@ import { Card, Collapse } from 'react-bootstrap';
 import React, { Component } from 'react';
 
 import { FILE_SORT_CHOICES } from '../../../constants/js-metrics';
+import FileDetailsModal from './FileDetails';
 import getNestedProperty from 'lodash/get';
-import FileDetailsModal from './FileDetailsModal';
 
 class JsResult extends Component {
   constructor(props) {

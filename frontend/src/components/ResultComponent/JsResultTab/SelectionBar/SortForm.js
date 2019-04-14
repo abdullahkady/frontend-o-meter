@@ -1,10 +1,15 @@
 import { Button, Dropdown, Form, InputGroup } from 'react-bootstrap';
 
-import { FILE_SORT_CHOICES } from '../../../../constants/js-metrics';
 import React from 'react';
 
-export default ({ onSortChanged, sortOption, toggleOrder, isAscending }) => {
-  const dropDownOptions = Object.keys(FILE_SORT_CHOICES).map((optionKey, i) => (
+export default ({
+  onSortChanged,
+  sortOption,
+  toggleOrder,
+  isAscending,
+  choices
+}) => {
+  const dropDownOptions = Object.keys(choices).map((optionKey, i) => (
     <Dropdown.Item key={i} eventKey={optionKey} as="div">
       {optionKey}
     </Dropdown.Item>

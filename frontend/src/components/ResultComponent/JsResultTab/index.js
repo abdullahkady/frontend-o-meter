@@ -8,7 +8,7 @@ import SelectionBar from './SelectionBar';
 import chunkArray from '../../../utils/chunkArray';
 import delay from '../../../utils/delay';
 import filterFiles from '../../../utils/filterFiles';
-import sortFiles from '../../../utils/sortFiles';
+import { sortFiles } from '../../../utils/sort';
 
 class JsTab extends Component {
   constructor(props) {

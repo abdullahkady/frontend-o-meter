@@ -14,10 +14,9 @@ const FILE_METHODS_BASE_OPTIONS = {
 };
 
 export const FILE_METHODS_METRICS_SORT_OPTIONS = {
-  ...FILE_METHODS_BASE_OPTIONS,
-  'Function Name': 'name',
   'Arguments/Parameters count': 'paramCount',
-  'Lines Of Code': 'sloc.logical'
+  'Lines Of Code': 'sloc.logical',
+  ...FILE_METHODS_BASE_OPTIONS
 };
 
 export const FILE_METHODS_METRICS = {
