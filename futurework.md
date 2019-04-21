@@ -1,4 +1,6 @@
 - Provide the system as a SaaS
 - Allow multiple tabs to be open simultaneously
 - Compare methods across files next to each other
+- Hot reload opened files
+- Add just a refresh button for current files
 - Add COSMIC FSM to the modules
