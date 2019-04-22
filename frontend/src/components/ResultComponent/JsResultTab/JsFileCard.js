@@ -40,13 +40,7 @@ class JsResult extends Component {
             <Collapse in={isOpen}>
               <div>
                 <strong>Aggregate File Metrics: </strong>
-                <ul
-                  style={{
-                    marginTop: 10,
-                    overflowY: 'scroll',
-                    maxHeight: 200
-                  }}
-                >
+                <ul>
                   {Object.keys(FILE_SORT_CHOICES).map((optionKey, i) => (
                     <li key={i}>
                       {`${optionKey}: `}
