@@ -1,4 +1,10 @@
-import { Card, Collapse, OverlayTrigger, Popover } from 'react-bootstrap';
+import {
+  Card,
+  Collapse,
+  OverlayTrigger,
+  Popover,
+  Table
+} from 'react-bootstrap';
 import {
   METRICS_DESCRIPTION,
   METRICS_DISPLAY_NAME
@@ -32,6 +38,35 @@ class CssResult extends Component {
       }
     }
 
+    const cssOffendersTable = (
+      <Table striped hover>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {offenders.map((off, i) => (
+            <tr key={i}>
+              <td>
+                {METRICS_DISPLAY_NAME[off.type]}
+                <OverlayTrigger
+                  placement="top"
+                  overlay={overlayFactory(off.type)}
+                >
+                  <span>{' [?]'}</span>
+                </OverlayTrigger>
+              </td>
+              <td>
+                <strong>{off.occurrences}</strong>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    );
+
     return (
       <Card style={{ width: '18rem' }}>
         <Card.Body>
@@ -42,22 +77,7 @@ class CssResult extends Component {
           </Card.Subtitle>
           <Card.Text as="div">
             <Collapse in={isOpen}>
-              <ul>
-                {offenders.map((off, i) => (
-                  <li key={i}>
-                    <strong>
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={overlayFactory(off.type)}
-                      >
-                        <span>{METRICS_DISPLAY_NAME[off.type]}: </span>
-                      </OverlayTrigger>
-                    </strong>
-
-                    {off.occurrences}
-                  </li>
-                ))}
-              </ul>
+              <div>{cssOffendersTable}</div>
             </Collapse>
           </Card.Text>
           <button

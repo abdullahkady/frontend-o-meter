@@ -1,4 +1,4 @@
-import { Card, Collapse } from 'react-bootstrap';
+import { Card, Collapse, Table } from 'react-bootstrap';
 import React, { Component } from 'react';
 
 import { FILE_SORT_CHOICES } from '../../../constants/js-metrics';
@@ -39,15 +39,29 @@ class JsResult extends Component {
             <hr />
             <Collapse in={isOpen}>
               <div>
-                <strong>Aggregate File Metrics: </strong>
-                <ul>
-                  {Object.keys(FILE_SORT_CHOICES).map((optionKey, i) => (
-                    <li key={i}>
-                      {`${optionKey}: `}
-                      {getNestedProperty(metrics, FILE_SORT_CHOICES[optionKey])}
-                    </li>
-                  ))}
-                </ul>
+                <Table striped hover>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.keys(FILE_SORT_CHOICES).map((optionKey, i) => (
+                      <tr key={i}>
+                        <td>{optionKey}</td>
+                        <td>
+                          <strong>
+                            {getNestedProperty(
+                              metrics,
+                              FILE_SORT_CHOICES[optionKey]
+                            )}
+                          </strong>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
               </div>
             </Collapse>
           </Card.Text>

@@ -1,4 +1,4 @@
-import { Card, Collapse } from 'react-bootstrap';
+import { Card, Collapse, Table } from 'react-bootstrap';
 import React, { Component } from 'react';
 
 import { FILE_METHODS_METRICS } from '../../../../constants/js-metrics';
@@ -28,15 +28,28 @@ class MethodDetailsCard extends Component {
       </React.Fragment>
     );
 
-    const metrics = Object.keys(FILE_METHODS_METRICS).map((option, i) => (
-      <li key={i}>
-        {option}:
-        <strong>
-          {' ' + getNestedProperty(data, FILE_METHODS_METRICS[option])}
-        </strong>
-      </li>
-    ));
-
+    const metricsTable = (
+      <Table striped hover>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(FILE_METHODS_METRICS).map((option, i) => (
+            <tr key={i}>
+              <td>{option}</td>
+              <td>
+                <strong>
+                  {getNestedProperty(data, FILE_METHODS_METRICS[option])}
+                </strong>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    );
     return (
       <Card>
         <Card.Body>
@@ -50,7 +63,7 @@ class MethodDetailsCard extends Component {
             <Collapse in={isOpen}>
               <div>
                 <strong>Metrics: </strong>
-                <ul>{metrics}</ul>
+                {metricsTable}
               </div>
             </Collapse>
           </Card.Text>
