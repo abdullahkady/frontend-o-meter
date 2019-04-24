@@ -62,7 +62,6 @@ class MethodDetailsCard extends Component {
             {summaryContent}
             <Collapse in={isOpen}>
               <div>
-                <strong>Metrics: </strong>
                 {metricsTable}
               </div>
             </Collapse>
