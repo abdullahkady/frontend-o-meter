@@ -4,13 +4,17 @@
   "version": "0.1.0",
   "private": true,
   "main": "public/electron-main.js",
+  "homepage": "./",
   "dependencies": {
+    "analyze-css": "^0.12.7",
     "bootstrap": "^4.3.1",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "recursive-readdir": "^2.2.2",
+    "typhonjs-escomplex": "^0.1.0"
   },
   "devDependencies": {
     "electron": "^4.1.4",
@@ -24,9 +28,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "preelectron-pack": "npm run build",
-    "electron-pack": "build -c.extraMetadata.main=build/electron-main.js",
-    "electron-start": "electron ."
+    "electron-pack": "npm run build && build -c.extraMetadata.main=build/electron-main.js",
+    "electron-pack-windows": "npm run build && build -w -c.extraMetadata.main=build/electron-main.js",
+    "electron-start": "electron . --serve"
   },
   "build": {
     "appId": "someID",
