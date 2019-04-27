@@ -1,7 +1,9 @@
 {
   "name": "frontend-o-meter",
+  "author": "Abdullah Elkady <abdullahkady@gmail.com>",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron-main.js",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "lodash": "^4.17.11",
@@ -10,11 +12,31 @@
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
   },
+  "devDependencies": {
+    "electron": "^4.1.4",
+    "electron-builder": "^20.39.0",
+    "jquery": "^3.4.0",
+    "popper.js": "^1.15.0",
+    "typescript": "^3.4.5"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preelectron-pack": "npm run build",
+    "electron-pack": "build -c.extraMetadata.main=build/electron-main.js",
+    "electron-start": "electron ."
+  },
+  "build": {
+    "appId": "someID",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
