@@ -12,6 +12,7 @@ import React, { Component } from 'react';
 import { ANALYZE_DELAY_RANGE_SECS } from './config/';
 import ResultComponent from './components/ResultComponent';
 import delay from './utils/delay';
+import analyzeDir from './analyzer';
 
 class App extends Component {
   constructor(props) {
@@ -31,16 +32,13 @@ class App extends Component {
       return;
     }
 
-    const raw = await fetch('http://localhost:4000/', {
-      method: 'POST',
-      body: JSON.stringify({ dirPath: input }),
-      headers: { 'Content-Type': 'application/json' }
-    });
-    if (raw.status === 200) {
-      const { css, js } = await raw.json();
+    try {
+      const { css, js } = await analyzeDir(input);
+
       await delay(ANALYZE_DELAY_RANGE_SECS);
       this.setState({ css, js, isSubmitting: false });
-    } else {
+    } catch (err) {
+      console.log(err);
       this.setState({
         css: [],
         js: [],
