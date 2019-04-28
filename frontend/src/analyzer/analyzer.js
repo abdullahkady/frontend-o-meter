@@ -1,7 +1,7 @@
-const jsAnalyzer = window.require('typhonjs-escomplex');
-const CssAnalyzer = window.require('analyze-css');
+const jsAnalyzer = require('typhonjs-escomplex');
+const CssAnalyzer = require('analyze-css');
 
-export const analyzeJS = sourceCode => {
+const analyzeJS = sourceCode => {
   const metrics = jsAnalyzer.analyzeModule(sourceCode);
 
   // ======= Clean up =======
@@ -25,10 +25,15 @@ export const analyzeJS = sourceCode => {
   return metrics;
 };
 
-export const analyzeCSS = sourceCode =>
+const analyzeCSS = sourceCode =>
   new Promise((res, rej) => {
     new CssAnalyzer(sourceCode, (err, result) => {
       if (err) return rej(err);
       return res(result.offenders);
     });
   });
+
+module.exports = {
+  analyzeCSS,
+  analyzeJS
+};

@@ -1,9 +1,9 @@
-import { analyzeJS, analyzeCSS } from './analyzer';
+const { analyzeJS, analyzeCSS } = require('./analyzer');
 
-const { promisify } = window.require('util');
-const recursiveReadDir = window.require('recursive-readdir');
-const fs = window.require('fs');
-const path = window.require('path');
+const { promisify } = require('util');
+const recursiveReadDir = require('recursive-readdir');
+const fs = require('fs');
+const path = require('path');
 
 const readFile = fileName => promisify(fs.readFile)(fileName, 'utf8');
 
@@ -62,4 +62,4 @@ const analyzeDirectory = async inputDirPath => {
   };
 };
 
-export default analyzeDirectory;
+module.exports = analyzeDirectory;

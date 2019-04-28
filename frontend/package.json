@@ -36,8 +36,10 @@
     "appId": "someID",
     "files": [
       "build/**/*",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "src/analyzer/**/*"
     ],
+    "asar":false,
     "directories": {
       "buildResources": "assets"
     }
