@@ -18,12 +18,20 @@ const ipcRenderer = electron.ipcRenderer;
 
 const fetchMetrics = dirPath =>
   new Promise((resolve, reject) => {
-    ipcRenderer.send('analyzeFiles', dirPath);
-    ipcRenderer.on('analyzeFiles-reply', (event, { err, result }) => {
+    ipcRenderer.send('analyzeDirectory', dirPath);
+    ipcRenderer.on('analyzeDirectory-reply', (event, { err, result }) => {
       if (err) {
         return reject(err);
       }
       resolve(result);
+    });
+  });
+
+const chooseDirectory = () =>
+  new Promise((resolve, reject) => {
+    ipcRenderer.send('chooseDirectory');
+    ipcRenderer.on('chooseDirectory-reply', (event, dirPath) => {
+      resolve(dirPath);
     });
   });
 
@@ -37,12 +45,18 @@ class App extends Component {
       isSubmitting: false
     };
   }
+
+  onBrowseDirectory = async () => {
+    const dirPath = await chooseDirectory();
+    this.setState({ input: dirPath });
+  };
+
   onSubmit = async () => {
     this.setState({ isSubmitting: true });
     const { input } = this.state;
 
     if (!input) {
-      this.setState({ error: 'Please provide a path' });
+      this.setState({ error: 'Please provide a path', isSubmitting: false });
       return;
     }
 
@@ -61,6 +75,7 @@ class App extends Component {
       });
     }
   };
+
   render() {
     const { css, js, error, isSubmitting } = this.state;
     if (css && js && (css.length || js.length)) {
@@ -68,7 +83,7 @@ class App extends Component {
     }
 
     const submitButton = isSubmitting ? (
-      <Button block={true} disabled variant="primary">
+      <Button block={true} disabled variant="success">
         <Spinner
           as="span"
           animation="grow"
@@ -76,11 +91,18 @@ class App extends Component {
           role="status"
           aria-hidden="true"
         />
-        Analyzing ...
+        Analyzing
+        <Spinner
+          as="span"
+          animation="grow"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
       </Button>
     ) : (
-      <Button block={true} onClick={this.onSubmit} variant="primary">
-        Submit
+      <Button block={true} onClick={this.onSubmit} variant="success">
+        Analyze
       </Button>
     );
 
@@ -102,7 +124,13 @@ class App extends Component {
               as="textarea"
               aria-label="Project path"
               onChange={e => this.setState({ input: e.target.value })}
+              value={this.state.input}
             />
+            <InputGroup.Append>
+              <Button variant="primary" onClick={this.onBrowseDirectory}>
+                Browse
+              </Button>
+            </InputGroup.Append>
           </InputGroup>
           <hr />
           {submitButton}

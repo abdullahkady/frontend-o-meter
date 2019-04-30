@@ -1,6 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-
-const path = require('path');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 
 const args = process.argv.slice(1);
 const serve = args.some(val => val === '--serve');
@@ -21,15 +19,8 @@ function createWindow() {
   win.maximize();
 
   if (serve) {
-    // Enable live reload
-    // require('electron-reload')(path.resolve(''), {
-    // Note that the path to electron may vary according to the main file
-    // electron: require(path.resolve('node_modules', 'electron'))
-    // });
     win.loadURL('http://localhost:3000');
   } else {
-    // load the index.html of the app.
-    // win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
     win.loadFile('build/index.html');
   }
 
@@ -69,14 +60,22 @@ app.on('activate', () => {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-ipcMain.on('analyzeFiles', (event, dirPath) => {
+ipcMain.on('analyzeDirectory', (event, dirPath) => {
   analyzeDir(dirPath)
     .then(result => {
-      event.sender.send('analyzeFiles-reply', { err: null, result });
+      event.sender.send('analyzeDirectory-reply', { err: null, result });
     })
     .catch(err =>
-      event.sender.send('analyzeFiles-reply', { err, result: null })
+      event.sender.send('analyzeDirectory-reply', { err, result: null })
     );
+});
+
+ipcMain.on('chooseDirectory', event => {
+  const [dirPath] = dialog.showOpenDialog(win, {
+    title: 'Choose Project Directory',
+    buttonLabel: 'Select Directory',
+    properties: ['openDirectory']
+  });
+
+  event.sender.send('chooseDirectory-reply', dirPath);
 });
