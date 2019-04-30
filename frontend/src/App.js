@@ -9,9 +9,7 @@ import {
 } from 'react-bootstrap';
 import React, { Component } from 'react';
 
-import { ANALYZE_DELAY_RANGE_SECS } from './config/';
 import ResultComponent from './components/ResultComponent';
-import delay from './utils/delay';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -75,7 +73,6 @@ class App extends Component {
         });
       }
 
-      await delay(ANALYZE_DELAY_RANGE_SECS);
       this.setState({ css, js, isSubmitting: false });
     } catch (err) {
       this.setState({
