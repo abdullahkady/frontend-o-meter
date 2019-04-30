@@ -4,3 +4,4 @@
 - Hot reload opened files
 - Add just a refresh button for current files
 - Add COSMIC FSM to the modules
+- Derive insights about the project (with visualization)
