@@ -53,7 +53,6 @@ class App extends Component {
       await delay(ANALYZE_DELAY_RANGE_SECS);
       this.setState({ css, js, isSubmitting: false });
     } catch (err) {
-      console.log(err);
       this.setState({
         css: [],
         js: [],
