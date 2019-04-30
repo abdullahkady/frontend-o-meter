@@ -55,14 +55,26 @@ class App extends Component {
     const { input } = this.state;
 
     if (!input) {
-      this.setState({ error: 'Please provide a path', isSubmitting: false });
-      return;
+      return this.setState({
+        error: 'Please provide a path',
+        isSubmitting: false
+      });
     }
 
     try {
       const res = await fetchMetrics(input);
-
       const { css, js } = res;
+      if (!css.length && !js.length) {
+        // Directory doesn't contain either files.
+        return this.setState({
+          css: [],
+          js: [],
+          error:
+            'Sorry, provided directory does not contain any relevant files (CSS, or JS)',
+          isSubmitting: false
+        });
+      }
+
       await delay(ANALYZE_DELAY_RANGE_SECS);
       this.setState({ css, js, isSubmitting: false });
     } catch (err) {

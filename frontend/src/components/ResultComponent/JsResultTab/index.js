@@ -88,7 +88,7 @@ class JsTab extends Component {
       pageContent = filesCards.length ? (
         filesCards
       ) : (
-        <h1>Sorry, no files matched your filter</h1>
+        <h1>Sorry, no JS files matching</h1>
       );
     }
 

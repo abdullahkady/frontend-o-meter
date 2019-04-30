@@ -67,18 +67,22 @@ class CssTab extends Component {
           />
         </Navbar>
         <Container className="text-center" style={{ marginTop: '15px' }}>
-          {rows.map((chunk, i) => (
-            <React.Fragment key={i}>
-              <Row>
-                {chunk.map((file, ix) => (
-                  <Col md={4} key={ix}>
-                    <CssFileCard data={file} />
-                  </Col>
-                ))}
-              </Row>
-              <br />
-            </React.Fragment>
-          ))}
+          {rows.length ? (
+            rows.map((chunk, i) => (
+              <React.Fragment key={i}>
+                <Row>
+                  {chunk.map((file, ix) => (
+                    <Col md={4} key={ix}>
+                      <CssFileCard data={file} />
+                    </Col>
+                  ))}
+                </Row>
+                <br />
+              </React.Fragment>
+            ))
+          ) : (
+            <h1>Sorry, no CSS files were found</h1>
+          )}
         </Container>
       </React.Fragment>
     );
