@@ -1,0 +1,33 @@
+{
+  "name": "frontend-o-meter",
+  "author": "Abdullah Elkady <abdullahkady@gmail.com>",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/electron-main.js",
+  "dependencies": {
+    "analyze-css": "^0.12.7",
+    "recursive-readdir": "^2.2.2",
+    "typhonjs-escomplex": "^0.1.0"
+  },
+  "devDependencies": {
+    "electron": "4.1.4",
+    "electron-builder": "^20.39.0"
+  },
+  "scripts": {
+    "start": "electron . --serve",
+    "build": "build -c.extraMetadata.main=./src/electron-main.js",
+    "electron-pack-windows": "build -w -c.extraMetadata.main=./src/electron-main.js"
+  },
+  "build": {
+    "appId": "some.app.id",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "src/**/*"
+    ],
+    "asar": false,
+    "directories": {
+      "buildResources": "assets"
+    }
+  }
+}

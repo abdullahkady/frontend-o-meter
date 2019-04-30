@@ -1,48 +1,22 @@
 {
-  "name": "frontend-o-meter",
+  "name": "frontend-o-meter-interface",
   "author": "Abdullah Elkady <abdullahkady@gmail.com>",
   "version": "0.1.0",
   "private": true,
-  "main": "public/electron-main.js",
   "homepage": "./",
   "dependencies": {
-    "analyze-css": "^0.12.7",
     "bootstrap": "^4.3.1",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8",
-    "recursive-readdir": "^2.2.2",
-    "typhonjs-escomplex": "^0.1.0"
-  },
-  "devDependencies": {
-    "electron": "^4.1.4",
-    "electron-builder": "^20.39.0",
-    "jquery": "^3.4.0",
-    "popper.js": "^1.15.0",
-    "typescript": "^3.4.5"
+    "react-scripts": "2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && mv build ../electron-app/",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "electron-pack": "npm run build && build -c.extraMetadata.main=build/electron-main.js",
-    "electron-pack-windows": "npm run build && build -w -c.extraMetadata.main=build/electron-main.js",
-    "electron-start": "electron . --serve"
-  },
-  "build": {
-    "appId": "someID",
-    "files": [
-      "build/**/*",
-      "node_modules/**/*",
-      "src/analyzer/**/*"
-    ],
-    "asar":false,
-    "directories": {
-      "buildResources": "assets"
-    }
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

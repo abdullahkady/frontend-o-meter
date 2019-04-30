@@ -30,7 +30,7 @@ function createWindow() {
   } else {
     // load the index.html of the app.
     // win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
-    win.loadFile(path.resolve('../build', 'index.html'));
+    win.loadFile('build/index.html');
   }
 
   // if (serve) {
