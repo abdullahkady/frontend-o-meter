@@ -1,7 +1,7 @@
 const jsAnalyzer = require('typhonjs-escomplex');
 const CssAnalyzer = require('analyze-css');
 
-const analyzeJS = (sourceCode) => {
+const analyzeJS = sourceCode => {
   const metrics = jsAnalyzer.analyzeModule(sourceCode);
 
   // ======= Clean up =======
@@ -11,7 +11,7 @@ const analyzeJS = (sourceCode) => {
   delete metrics.aggregate.halstead.operators;
   delete metrics.methodAverage.halstead.operators;
   delete metrics.methodAverage.halstead.operands;
-  delete metrics.methods.forEach((method) => {
+  delete metrics.methods.forEach(method => {
     delete method.halstead.operands;
     delete method.halstead.operators;
 
@@ -25,14 +25,15 @@ const analyzeJS = (sourceCode) => {
   return metrics;
 };
 
-const analyzeCSS = sourceCode => new Promise((res, rej) => {
-  new CssAnalyzer(sourceCode, (err, result) => {
-    if (err) return rej(err);
-    return res(result.offenders);
+const analyzeCSS = sourceCode =>
+  new Promise((res, rej) => {
+    new CssAnalyzer(sourceCode, (err, result) => {
+      if (err) return rej(err);
+      return res(result.offenders);
+    });
   });
-});
 
 module.exports = {
-  analyzeJS,
   analyzeCSS,
+  analyzeJS
 };

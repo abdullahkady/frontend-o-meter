@@ -69,8 +69,11 @@ typings/
 # next.js build output
 .next
 
+# Electron comiled binaries
+dist/
+
 # Create react app
 /.pnp
 .pnp.js
-/build
+build/
 vendor/
