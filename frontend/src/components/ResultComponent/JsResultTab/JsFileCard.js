@@ -2,6 +2,7 @@ import { Card, Collapse, Table } from 'react-bootstrap';
 import React, { Component } from 'react';
 
 import { FILE_SORT_CHOICES } from '../../../constants/js-metrics';
+import { FaLink } from 'react-icons/fa';
 import FileDetailsModal from './FileDetails';
 import getNestedProperty from 'lodash/get';
 
@@ -25,6 +26,7 @@ class JsResult extends Component {
             onClick={() => this.setState({ shouldShow: true })}
           >
             {fileName.split('/').pop()}
+            <FaLink color="blue" className="float-right" />
           </Card.Header>
           <br />
           <Card.Subtitle className="mb-2 text-muted">
