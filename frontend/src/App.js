@@ -13,8 +13,7 @@ import { ANALYZE_DELAY_RANGE_SECS } from './config/';
 import ResultComponent from './components/ResultComponent';
 import delay from './utils/delay';
 
-const electron = window.require('electron');
-const ipcRenderer = electron.ipcRenderer;
+const { ipcRenderer } = window.require('electron');
 
 const fetchMetrics = dirPath =>
   new Promise((resolve, reject) => {

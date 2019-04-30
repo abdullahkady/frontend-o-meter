@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const fs = require('fs');
 
 const args = process.argv.slice(1);
 const serve = args.some(val => val === '--serve');
@@ -78,4 +79,17 @@ ipcMain.on('chooseDirectory', event => {
   });
 
   event.sender.send('chooseDirectory-reply', dirPath);
+});
+
+ipcMain.on('saveFile', (event, data) => {
+  const filePath = dialog.showSaveDialog(win, {
+    title: 'Save your exported data',
+    defaultPath: 'exported.json'
+  });
+
+  if (filePath) {
+    fs.writeFile(filePath, JSON.stringify(data, null, 2), err => {
+      // I'm a terrible person \_0_/
+    });
+  }
 });
