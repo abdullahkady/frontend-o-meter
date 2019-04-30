@@ -31,7 +31,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: '/home/abdullah/Desktop/bsc-project/input',
+      input: '',
       css: [],
       js: [],
       isSubmitting: false
@@ -103,7 +103,6 @@ class App extends Component {
               as="textarea"
               aria-label="Project path"
               onChange={e => this.setState({ input: e.target.value })}
-              defaultValue="/home/abdullah/Desktop/bsc-project/input"
             />
           </InputGroup>
           <hr />
