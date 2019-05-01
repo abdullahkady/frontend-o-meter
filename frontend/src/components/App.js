@@ -59,8 +59,9 @@ class App extends Component {
     }
 
     try {
-      const res = await fetchMetrics(input);
-      const { css, js } = res;
+      const metrics = await fetchMetrics(input);
+      const { css, js } = metrics;
+      this.props.onResultsChanged({ css, js });
       if (!css.length && !js.length) {
         // Directory doesn't contain either files.
         return this.setState({
