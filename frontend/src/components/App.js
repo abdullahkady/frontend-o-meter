@@ -9,7 +9,7 @@ import {
 } from 'react-bootstrap';
 import React, { Component } from 'react';
 
-import ResultComponent from './components/ResultComponent';
+import ResultComponent from './ResultComponent';
 
 const { ipcRenderer, shell } = window.require('electron');
 
