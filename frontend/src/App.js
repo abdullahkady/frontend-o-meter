@@ -11,7 +11,15 @@ import React, { Component } from 'react';
 
 import ResultComponent from './components/ResultComponent';
 
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer, shell } = window.require('electron');
+
+// Make all HTTP links open in the OS default browser.
+document.addEventListener('click', event => {
+  if (event.target.tagName === 'A' && event.target.href.startsWith('http')) {
+    event.preventDefault();
+    shell.openExternal(event.target.href);
+  }
+});
 
 const fetchMetrics = dirPath =>
   new Promise((resolve, reject) => {
