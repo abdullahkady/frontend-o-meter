@@ -68,12 +68,15 @@ ipcMain.on('analyzeDirectory', (event, dirPath) => {
 });
 
 ipcMain.on('chooseDirectory', event => {
-  const [dirPath] = dialog.showOpenDialog(win, {
+  const rawSelection = dialog.showOpenDialog(win, {
     title: 'Choose Project Directory',
     buttonLabel: 'Select Directory',
     properties: ['openDirectory']
   });
-
+  if (!rawSelection) {
+    return event.sender.send('chooseDirectory-reply', '');
+  }
+  const [dirPath] = rawSelection;
   event.sender.send('chooseDirectory-reply', dirPath);
 });
 
