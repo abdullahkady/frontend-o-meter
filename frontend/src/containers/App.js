@@ -3,6 +3,7 @@ import { ipcRenderer, shell } from 'electron';
 
 import App from '../components/App';
 import TitleBar from 'frameless-titlebar';
+import appIcon from '../assets/performance.png';
 
 const exportJSON = data => {
   ipcRenderer.send('saveFile', data);
@@ -84,7 +85,7 @@ export default class AppContainer extends Component {
     return (
       <React.Fragment>
         <TitleBar
-          // icon={`${__dirname}/../resources/icon.png`}
+          icon={appIcon}
           app="Frontend-o-Meter"
           menu={this.state.menu}
           theme={{

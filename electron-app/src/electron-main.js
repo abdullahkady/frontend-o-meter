@@ -12,14 +12,12 @@ let win;
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1600,
+    height: 900,
     frame: false,
     titleBarStyle: 'hidden',
     webPreferences: { nodeIntegration: true }
   });
-
-  win.maximize();
 
   if (serve) {
     win.loadURL('http://localhost:3000');
