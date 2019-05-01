@@ -1,9 +1,13 @@
 import { Card, Collapse, Table } from 'react-bootstrap';
+import {
+  FILE_METRICS_DESCRIPTION,
+  FILE_SORT_CHOICES
+} from '../../../constants/js-metrics';
 import React, { Component } from 'react';
 
-import { FILE_SORT_CHOICES } from '../../../constants/js-metrics';
 import { FaLink } from 'react-icons/fa';
 import FileDetailsModal from './FileDetails';
+import StickyPopOverComponent from '../../StickyPopOverComponent';
 import getNestedProperty from 'lodash/get';
 
 class JsResult extends Component {
@@ -51,7 +55,23 @@ class JsResult extends Component {
                   <tbody>
                     {Object.keys(FILE_SORT_CHOICES).map((optionKey, i) => (
                       <tr key={i}>
-                        <td>{optionKey}</td>
+                        <td>
+                          {optionKey}
+
+                          <StickyPopOverComponent
+                            title={optionKey}
+                            content={FILE_METRICS_DESCRIPTION[optionKey]}
+                            placement="top"
+                            onMouseEnter={() => {}}
+                            delay={200}
+                          >
+                            <strong
+                              style={{ cursor: 'pointer', color: 'blue' }}
+                            >
+                              {' [?]'}
+                            </strong>
+                          </StickyPopOverComponent>
+                        </td>
                         <td>
                           <strong>
                             {getNestedProperty(
