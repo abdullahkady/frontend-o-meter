@@ -5,3 +5,11 @@
 - Add just a refresh button for current files
 - Add COSMIC FSM to the modules
 - Derive insights about the project (with visualization)
+
+
+
+
+# BSc comments
+- Make a video
+- Add an about section
+- Reference Images correctly in the thesis
