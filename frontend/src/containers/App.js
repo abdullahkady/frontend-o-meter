@@ -1,7 +1,7 @@
 // import TitleBar from 'frameless-titlebar';
 import React from 'react';
 import App from '../components/App';
-const { shell } = window.require('electron');
+import { shell } from 'electron';
 
 // Make all HTTP links open in the OS default browser.
 document.addEventListener('click', event => {

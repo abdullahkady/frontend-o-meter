@@ -8,22 +8,9 @@ import {
   Spinner
 } from 'react-bootstrap';
 import React, { Component } from 'react';
+import { ipcRenderer } from 'electron';
 
 import ResultComponent from './ResultComponent';
-
-const { ipcRenderer, shell } = window.require('electron');
-
-// Make all HTTP links open in the OS default browser.
-document.addEventListener('click', event => {
-  if (event.target.tagName !== 'A') return;
-  const { href } = event.target;
-  if (href.startsWith('http') && !href.includes('localhost')) {
-    // The href.includes condition is a workaround to avoid bootstrap's
-    // default anchor tag for the Tabs component
-    event.preventDefault();
-    shell.openExternal(event.target.href);
-  }
-});
 
 const fetchMetrics = dirPath =>
   new Promise((resolve, reject) => {

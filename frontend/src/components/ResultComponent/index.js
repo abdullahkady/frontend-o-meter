@@ -1,10 +1,10 @@
 import { Container, Tab, Tabs } from 'react-bootstrap';
+import { ipcRenderer, remote } from 'electron';
 
 import CssTab from './CssResultTab';
 import JsTab from './JsResultTab';
 import React from 'react';
 
-const { remote, ipcRenderer } = window.require('electron');
 const { Menu, MenuItem } = remote;
 
 const exportJSON = data => {
