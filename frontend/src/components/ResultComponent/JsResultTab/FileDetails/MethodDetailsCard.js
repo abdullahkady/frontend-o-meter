@@ -56,7 +56,7 @@ class MethodDetailsCard extends Component {
           <Card.Header>{data.name}</Card.Header>
           <br />
           <Card.Subtitle className="mb-2 text-muted">
-            Lines: {data.sloc.logical}
+            Lines: {data.sloc.physical}
           </Card.Subtitle>
           <Card.Text as="div">
             {summaryContent}

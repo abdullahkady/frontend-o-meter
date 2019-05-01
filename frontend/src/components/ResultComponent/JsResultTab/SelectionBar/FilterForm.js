@@ -22,7 +22,7 @@ class FilterForm extends Component {
   }
 
   componentDidMount() {
-    this.setState({ filterField: 'Lines of Code(logical)' });
+    this.setState({ filterField: 'Lines of Code(physical)' });
   }
 
   onFilterFieldChanged = filterField => {

@@ -34,7 +34,7 @@ class JsResult extends Component {
           </Card.Header>
           <br />
           <Card.Subtitle className="mb-2 text-muted">
-            Lines: {metrics.aggregate.sloc.logical}
+            Lines: {metrics.aggregate.sloc.physical}
           </Card.Subtitle>
           <Card.Text as="div">
             {`The file contains a total of ${

@@ -22,7 +22,7 @@ class JsTab extends Component {
   }
 
   componentDidMount() {
-    this.setState({ sortOption: 'Lines of Code(logical)' });
+    this.setState({ sortOption: 'Lines of Code(physical)' });
   }
 
   onSortChanged = sortType => {
