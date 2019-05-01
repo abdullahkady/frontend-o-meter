@@ -1,21 +1,11 @@
-import {
-  Card,
-  Collapse,
-  OverlayTrigger,
-  Popover,
-  Table
-} from 'react-bootstrap';
+import { Card, Collapse, Table } from 'react-bootstrap';
 import {
   METRICS_DESCRIPTION,
   METRICS_DISPLAY_NAME
 } from '../../../constants/css-metrics';
 import React, { Component } from 'react';
 
-const overlayFactory = offender => (
-  <Popover title={METRICS_DISPLAY_NAME[offender]}>
-    {METRICS_DESCRIPTION[offender]}
-  </Popover>
-);
+import StickyPopOverComponent from '../../StickyPopOverComponent';
 
 class CssResult extends Component {
   constructor(props) {
@@ -51,12 +41,17 @@ class CssResult extends Component {
             <tr key={i}>
               <td>
                 {METRICS_DISPLAY_NAME[off.type]}
-                <OverlayTrigger
+                <StickyPopOverComponent
+                  title={METRICS_DISPLAY_NAME[off.type]}
+                  content={METRICS_DESCRIPTION[off.type]}
                   placement="top"
-                  overlay={overlayFactory(off.type)}
+                  onMouseEnter={() => {}}
+                  delay={200}
                 >
-                  <span>{' [?]'}</span>
-                </OverlayTrigger>
+                  <strong style={{ cursor: 'pointer', color: 'blue' }}>
+                    {' [?]'}
+                  </strong>
+                </StickyPopOverComponent>
               </td>
               <td>
                 <strong>{off.occurrences}</strong>
