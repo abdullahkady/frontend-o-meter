@@ -23,11 +23,16 @@
     "files": [
       "build/**/*",
       "node_modules/**/*",
-      "src/**/*"
+      "src/**/*",
+      "assets/**/*"
     ],
     "asar": false,
-    "directories": {
-      "buildResources": "assets"
+    "artifactName": "frontend-o-meter.${ext}",
+    "linux": {
+      "artifactName": "frontend-o-meter",
+      "target": [
+        "AppImage"
+      ]
     }
   }
 }

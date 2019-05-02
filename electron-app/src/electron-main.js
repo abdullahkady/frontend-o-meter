@@ -4,6 +4,7 @@ const fs = require('fs');
 const args = process.argv.slice(1);
 const serve = args.some(val => val === '--serve');
 const analyzeDir = require('../src/analyzer');
+const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -11,7 +12,9 @@ let win;
 
 function createWindow() {
   // Create the browser window.
+
   win = new BrowserWindow({
+    icon: path.join(__dirname, '../assets/icons/png/512x512.png'),
     width: 1600,
     height: 900,
     frame: false,
