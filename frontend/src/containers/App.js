@@ -42,6 +42,7 @@ export default class AppContainer extends Component {
 
   resetApp = () => {
     this.setState(prevState => ({
+      menu: [this.NEW_MENU_OPTION, this.ABOUT_MENU_OPTION],
       appResetFlag: !prevState.appResetFlag
     }));
   };
