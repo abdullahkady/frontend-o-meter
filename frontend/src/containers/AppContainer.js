@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ipcRenderer, shell } from 'electron';
 
 import App from '../components/App';
+import TourApp from '../tour-components/App';
 import TitleBar from 'frameless-titlebar';
 import appIcon from '../assets/performance.png';
 
@@ -26,24 +27,42 @@ export default class AppContainer extends Component {
     label: 'New',
     click: () => this.resetApp()
   };
-  ABOUT_MENU_OPTION = {
-    label: 'About',
-    click: () =>
-      shell.openExternal('https://github.com/AbdullahKady/frontend-o-meter/')
+  HELP_SUB_MENU = {
+    label: 'Help',
+    submenu: [
+      {
+        label: 'Start Tour',
+        click: () =>
+          this.setState(prevState => ({
+            menu: [this.NEW_MENU_OPTION, this.HELP_SUB_MENU],
+            appResetFlag: !prevState.appResetFlag,
+            shouldTour: true
+          }))
+      },
+      {
+        label: 'About',
+        click: () =>
+          shell.openExternal(
+            'https://github.com/AbdullahKady/frontend-o-meter/'
+          )
+      }
+    ]
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      menu: [this.NEW_MENU_OPTION, this.ABOUT_MENU_OPTION],
-      appResetFlag: true
+      menu: [this.NEW_MENU_OPTION, this.HELP_SUB_MENU],
+      appResetFlag: true,
+      shouldTour: false
     };
   }
 
   resetApp = () => {
     this.setState(prevState => ({
-      menu: [this.NEW_MENU_OPTION, this.ABOUT_MENU_OPTION],
-      appResetFlag: !prevState.appResetFlag
+      menu: [this.NEW_MENU_OPTION, this.HELP_SUB_MENU],
+      appResetFlag: !prevState.appResetFlag,
+      shouldTour: false
     }));
   };
 
@@ -78,11 +97,27 @@ export default class AppContainer extends Component {
     }
 
     this.setState({
-      menu: [this.NEW_MENU_OPTION, exportMenu, this.ABOUT_MENU_OPTION]
+      menu: [this.NEW_MENU_OPTION, exportMenu, this.HELP_SUB_MENU]
     });
   };
 
   render() {
+    let app;
+    if (this.state.shouldTour) {
+      app = (
+        <TourApp
+          onResultsChanged={this.onResultsChanged}
+          onTourEnded={() => this.setState({ shouldTour: false })}
+        />
+      );
+    } else {
+      app = (
+        <App
+          key={this.state.appResetFlag}
+          onResultsChanged={this.onResultsChanged}
+        />
+      );
+    }
     return (
       <React.Fragment>
         <TitleBar
@@ -99,10 +134,7 @@ export default class AppContainer extends Component {
             menuDimItems: false
           }}
         />
-        <App
-          key={this.state.appResetFlag}
-          onResultsChanged={this.onResultsChanged}
-        />
+        {app}
       </React.Fragment>
     );
   }

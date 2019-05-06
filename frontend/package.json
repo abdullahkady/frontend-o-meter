@@ -49,6 +49,7 @@
     "react-dev-utils": "^8.0.0",
     "react-dom": "^16.8.6",
     "react-icons": "^3.6.1",
+    "react-joyride": "^2.0.5",
     "resolve": "1.10.0",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
