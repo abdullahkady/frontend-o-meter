@@ -139,6 +139,7 @@ class App extends Component {
       <Container style={{ marginTop: '10px' }}>
         <Joyride
           callback={this.handleJoyrideCallback}
+          disableCloseOnEsc={true}
           run={true}
           showProgress={true}
           disableOverlayClose={true}

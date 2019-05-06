@@ -6,8 +6,35 @@ import { METRICS_DISPLAY_NAME } from '../../../constants/css-metrics';
 import SortForm from '../JsResultTab/SelectionBar/SortForm';
 import chunkArray from '../../../utils/chunkArray';
 import isEmpty from 'lodash/isEmpty';
+import Joyride from 'react-joyride';
 
 const REVERSE_DISPLAY_OPTIONS = {};
+const STEPS = [
+  {
+    target:
+      '#root > div.container > div.tab-content > div.fade.tab-pane.active.show > div > nav',
+    hideCloseButton: true,
+    disableBeacon: true,
+    content:
+      'You can sort the files using the offenders found in the files of your project'
+  },
+  {
+    target:
+      '#root > div.container > div.tab-content > div.fade.tab-pane.active.show > div > div.text-center.container > div > div:nth-child(1) > div > div',
+    hideCloseButton: true,
+    disableBeacon: true,
+    content:
+      'Each file is represented in a card, with a summary of the offenders (selectors that are not compliant with the standards)'
+  },
+  {
+    target:
+      '#root > div.container > div.tab-content > div.fade.tab-pane.active.show > div > div.text-center.container > div > div:nth-child(1) > div > div > button',
+    hideCloseButton: true,
+    disableBeacon: true,
+    content:
+      'You can expand the file metrics to get a more detailed look at the aggregate metrics'
+  }
+];
 class CssTab extends Component {
   constructor(props) {
     super(props);
@@ -31,12 +58,22 @@ class CssTab extends Component {
       this.setState({ sortOption: Object.keys(REVERSE_DISPLAY_OPTIONS)[0] });
   }
 
-  onSortChanged = sortType => {
-    this.setState({ sortOption: sortType });
+  handleJoyRide = ({ lifecycle, index, status }) => {
+    if (lifecycle === 'complete' && index === 2) {
+      document
+        .querySelector(
+          '#root > div.container > div.tab-content > div.fade.tab-pane.active.show > div > div.text-center.container > div > div:nth-child(1) > div > div > button'
+        )
+        .click();
+      setTimeout(() => {
+        // TODO: FIXME!
+        return this.props.onTourEnded();
+      }, 2000);
+    }
   };
 
   render() {
-    let { data: files } = this.props;
+    let { data: files, startTour } = this.props;
     const { sortOption, isAscending } = this.state;
 
     const sortOptionObjectPath = REVERSE_DISPLAY_OPTIONS[sortOption];
@@ -57,6 +94,13 @@ class CssTab extends Component {
 
     return (
       <React.Fragment>
+        <Joyride
+          continuous
+          disableCloseOnEsc={true}
+          steps={STEPS}
+          run={startTour}
+          callback={this.handleJoyRide}
+        />
         <Navbar className="bg-light justify-content-center">
           <SortForm
             choices={REVERSE_DISPLAY_OPTIONS}

@@ -107,7 +107,13 @@ export default class AppContainer extends Component {
       app = (
         <TourApp
           onResultsChanged={this.onResultsChanged}
-          onTourEnded={() => this.setState({ shouldTour: false })}
+          onTourEnded={() =>
+            this.setState(prevState => ({
+              menu: [this.NEW_MENU_OPTION, this.HELP_SUB_MENU],
+              appResetFlag: !prevState.appResetFlag,
+              shouldTour: false
+            }))
+          }
         />
       );
     } else {

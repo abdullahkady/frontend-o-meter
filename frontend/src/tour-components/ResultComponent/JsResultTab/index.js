@@ -127,6 +127,7 @@ class JsTab extends Component {
     return (
       <React.Fragment>
         <Joyride
+          disableCloseOnEsc={true}
           continuous
           steps={STEPS}
           run={startTour}

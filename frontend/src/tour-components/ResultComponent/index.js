@@ -28,6 +28,7 @@ export default class extends Component {
     return (
       <Container>
         <Joyride
+          disableCloseOnEsc={true}
           steps={steps}
           callback={({ status }) => {
             if (status === 'finished') this.setState({ startJSTour: true });
