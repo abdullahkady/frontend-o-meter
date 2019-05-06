@@ -15,8 +15,9 @@
   },
   "scripts": {
     "start": "electron . --serve",
-    "build": "build -c.extraMetadata.main=./src/electron-main.js",
-    "electron-pack-windows": "build -w -c.extraMetadata.main=./src/electron-main.js"
+    "build": "build -wl -c.extraMetadata.main=./src/electron-main.js",
+    "electron-pack-windows": "build -w -c.extraMetadata.main=./src/electron-main.js",
+    "electron-pack-linux": "build -l -c.extraMetadata.main=./src/electron-main.js"
   },
   "build": {
     "appId": "some.app.id",
@@ -27,12 +28,21 @@
       "assets/**/*"
     ],
     "asar": false,
-    "artifactName": "frontend-o-meter.${ext}",
+    "icon": "icons/png/512x512.png",
     "linux": {
       "artifactName": "frontend-o-meter",
       "target": [
         "AppImage"
       ]
+    },
+    "win": {
+      "artifactName": "frontend-o-meter.${ext}",
+      "target": [
+        "portable"
+      ]
+    },
+    "directories": {
+      "buildResources": "assets"
     }
   }
 }
