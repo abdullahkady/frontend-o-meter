@@ -5,6 +5,8 @@ import {
 } from '../../../constants/css-metrics';
 import React, { Component } from 'react';
 
+import { FaLink } from 'react-icons/fa';
+import FileCSSMetricsModal from './FileCSSMetricsModal';
 import StickyPopOverComponent from '../../StickyPopOverComponent';
 
 class CssResult extends Component {
@@ -17,14 +19,17 @@ class CssResult extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { file, metrics } = this.props.data;
+    const {
+      file,
+      metrics: { offenders: rawOffenders, metrics }
+    } = this.props.data;
     let totalOffenders = 0;
     const offenders = [];
 
-    for (const key in metrics) {
-      if (metrics.hasOwnProperty(key)) {
-        totalOffenders += metrics[key].length;
-        offenders.push({ type: key, occurrences: metrics[key].length });
+    for (const key in rawOffenders) {
+      if (rawOffenders.hasOwnProperty(key)) {
+        totalOffenders += rawOffenders[key].length;
+        offenders.push({ type: key, occurrences: rawOffenders[key].length });
       }
     }
 
@@ -65,7 +70,13 @@ class CssResult extends Component {
     return (
       <Card style={{ width: '18rem' }}>
         <Card.Body>
-          <Card.Header>{file.split('/').pop()}</Card.Header>
+          <Card.Header
+            style={{ cursor: 'pointer' }}
+            onClick={() => this.setState({ shouldShow: true })}
+          >
+            {file.split('/').pop()}
+            <FaLink color="blue" className="float-right" />
+          </Card.Header>
           <br />
           <Card.Subtitle className="mb-2 text-muted">
             Total Possible Offenders: {totalOffenders}
@@ -81,7 +92,14 @@ class CssResult extends Component {
           >
             {this.state.isOpen ? 'Hide ' : 'Show'} Offenders
           </button>
+
           <hr />
+          <FileCSSMetricsModal
+            fileName={file}
+            metrics={metrics}
+            show={this.state.shouldShow}
+            onHide={() => this.setState({ shouldShow: false })}
+          />
           <Card.Footer className="justify-content-md-center">
             <pre style={{ whiteSpace: 'pre-wrap' }}>{file}</pre>
           </Card.Footer>

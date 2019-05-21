@@ -20,7 +20,7 @@ class CssTab extends Component {
   componentDidMount() {
     // Only populate the sort list with the present offenders
     this.props.data.forEach(file => {
-      Object.keys(file.metrics).forEach(key => {
+      Object.keys(file.metrics.offenders).forEach(key => {
         const displayValue = METRICS_DISPLAY_NAME[key];
         if (!REVERSE_DISPLAY_OPTIONS[displayValue])
           REVERSE_DISPLAY_OPTIONS[displayValue] = key;
@@ -42,15 +42,17 @@ class CssTab extends Component {
     const sortOptionObjectPath = REVERSE_DISPLAY_OPTIONS[sortOption];
 
     if (sortOption) {
-      files = files.sort(({ metrics: f1 }, { metrics: f2 }) => {
-        const f1Value = f1[sortOptionObjectPath]
-          ? f1[sortOptionObjectPath].length
-          : 0;
-        const f2Value = f2[sortOptionObjectPath]
-          ? f2[sortOptionObjectPath].length
-          : 0;
-        return isAscending ? f1Value - f2Value : f2Value - f1Value;
-      });
+      files = files.sort(
+        ({ metrics: { offenders: f1 } }, { metrics: { offenders: f2 } }) => {
+          const f1Value = f1[sortOptionObjectPath]
+            ? f1[sortOptionObjectPath].length
+            : 0;
+          const f2Value = f2[sortOptionObjectPath]
+            ? f2[sortOptionObjectPath].length
+            : 0;
+          return isAscending ? f1Value - f2Value : f2Value - f1Value;
+        }
+      );
     }
 
     const rows = chunkArray(files, 3);

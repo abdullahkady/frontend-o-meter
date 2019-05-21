@@ -29,7 +29,11 @@ const analyzeCSS = sourceCode =>
   new Promise((res, rej) => {
     new CssAnalyzer(sourceCode, (err, result) => {
       if (err) return rej(err);
-      return res(result.offenders);
+      delete result.metrics.oldIEFixes;
+      delete result.metrics.notMinified;
+      delete result.metrics.qualifiedSelectors;
+      delete result.metrics.length;
+      return res(result);
     });
   });
 
