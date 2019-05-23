@@ -7,14 +7,7 @@ const analyzeJS = sourceCode => {
   // ======= Clean up =======
   delete metrics.aggregateAverage;
   delete metrics.settings;
-  delete metrics.aggregate.halstead.operands;
-  delete metrics.aggregate.halstead.operators;
-  delete metrics.methodAverage.halstead.operators;
-  delete metrics.methodAverage.halstead.operands;
-  delete metrics.methods.forEach(method => {
-    delete method.halstead.operands;
-    delete method.halstead.operators;
-
+  metrics.methods.forEach(method => {
     if (method.name.startsWith('<anon')) {
       method.name = `anon-L${method.lineStart}`;
     }
@@ -29,6 +22,7 @@ const analyzeCSS = sourceCode =>
   new Promise((res, rej) => {
     new CssAnalyzer(sourceCode, (err, result) => {
       if (err) return rej(err);
+      delete result.generator;
       delete result.metrics.oldIEFixes;
       delete result.metrics.notMinified;
       delete result.metrics.qualifiedSelectors;
