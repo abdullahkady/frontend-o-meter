@@ -85,22 +85,20 @@ export default class AppContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="sticky-top">
-          <TitleBar
-            icon={appIcon}
-            app="Frontend-o-Meter"
-            menu={this.state.menu}
-            theme={{
-              barTheme: 'dark',
-              barBackgroundColor: '#251d24',
-              menuStyle: 'vertical',
-              menuHighlightColor: '#52a98c',
-              barHeight: '32px',
-              winBarHeight: '38px',
-              menuDimItems: false
-            }}
-          />
-        </div>
+        <TitleBar
+          icon={appIcon}
+          app="Frontend-o-Meter"
+          menu={this.state.menu}
+          theme={{
+            barTheme: 'dark',
+            barBackgroundColor: '#251d24',
+            menuStyle: 'vertical',
+            menuHighlightColor: '#52a98c',
+            barHeight: '32px',
+            winBarHeight: '38px',
+            menuDimItems: false
+          }}
+        />
         <App
           key={this.state.appResetFlag}
           onResultsChanged={this.onResultsChanged}
